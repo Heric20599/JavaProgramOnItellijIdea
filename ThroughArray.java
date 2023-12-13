@@ -1,76 +1,61 @@
-package QUEUE.Implementation;
+package STACKS.Implementation;
 
 public class ThroughArray {
-    public static class queueA {
-         int f=-1;
-        int r = -1;
-        int size = 0;
-        int[] arr= new int [90];
+    public static class Stack {
+        private int[] arr = new int[5];
+        private int idx = 0;
+        int size=0;
 
-
-
-        Boolean isEmpty() {
-            return size== 0;
-        }
-
-        Boolean isFull() {
-            return size == arr.length;
-        }
-
-        void add(int val) {             // to insert the element
-            if (r == arr.length - 1) {
-                System.out.print("full queue");
-                return;
-            }
-            if(f==-1) {
-                f=r=0;
-                arr[0]=val;
-            }else {
-                arr[++r] = val;
-            }
+        void push(int x) {
+            if (idx == arr.length) {
+                System.out.println("stack is overflow");
+            } else
+                arr[idx] = x;
+            idx++;
             size++;
         }
 
-        int remove() {   //to remove of element
-            if (size==0) {
-                System.out.print("empty queue");
+        int pop() {
+            if (idx == 0) {
+                System.out.println("stack is empty we cant delete element from stack");
                 return -1;
             }
-           f++;
-           size--;
-           return arr[f-1];
+            int top = arr[idx - 1];
+            arr[idx - 1] = 0;
+            idx--;
+            size--;
+            return top;
         }
 
-        int peek(){
-             if (size==0) {
-                System.out.print("empty queue");
+        int peek() {
+            if (idx == 0) {
+                System.out.print("stack is empty");
                 return -1;
             }
-            return arr[f];
+            return arr[idx - 1];
         }
+
         void display() {
-            if (size == 0) {
-                System.out.print("empty queue");
-            } else {
-                for (int i = f; i <= r; i++) {
-                    System.out.print(arr[i] + " ");
-                }
-                System.out.println();
+            for (int i = 0; i <= idx - 1; i++) {
+                System.out.print(arr[i] + "-> ");
             }
+            System.out.println();
         }
     }
 
 
-    public static void main(String[] args) {
-     queueA q=new queueA();
-     q.add(34);
-     q.add(45);
-     q.add(56);
-         q.display();
-        q.remove();
-        q.display();
+        public static void main(String[] args) {
+            Stack st = new Stack();
+            st.push(3);
+            st.push(4);
+            st.push(5);
+            System.out.println(st.size);
+          // st.display();
+          //  st.pop();
+            //st.display();
+           // st.size();
 
+
+        }
     }
 
-
-}
